@@ -18,7 +18,40 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  List<Livro> listaLivros = [];
+  List<Livro> listaLivros = [
+    Livro(
+      id: '1',
+      titulo: 'Dom Casmurro',
+      autor: 'Machado de Assis',
+      genero: 'Romance',
+      cor: Colors.deepPurple,
+      lido: true,
+      liked: true,
+    ),
+    Livro(
+      id: '2',
+      titulo: '1984',
+      autor: 'George Orwell',
+      genero: 'Distopia',
+      cor: Colors.blue,
+    ),
+    Livro(
+      id: '3',
+      titulo: 'O Senhor dos Anéis',
+      autor: 'J.R.R. Tolkien',
+      genero: 'Fantasia',
+      cor: Colors.green,
+      lido: true,
+    ),
+    Livro(
+      id: '4',
+      titulo: 'Fomos Planejados',
+      autor: 'Marcus Eberlin',
+      genero: 'Ciência/Religião',
+      cor: Colors.orange,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
