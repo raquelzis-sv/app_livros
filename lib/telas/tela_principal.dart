@@ -64,9 +64,9 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     fontSize: 14,
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 15),
 
-                  // Botão de Cadastrar mais chamativo
+                  // segundo Botão de Cadastrar
                   ElevatedButton.icon(
                     onPressed: () async {
                       final retorno = await Navigator.push(
@@ -94,10 +94,11 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     ),
                   ),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 15),
 
                   SizedBox(
-                    height: 250,
+                    height: 300,
+                    width: 600,
                     child: listaLivros.isEmpty
                         ? const Center(child: Text('Nenhum livro cadastrado.'))
                         : PageView.builder(

@@ -1,5 +1,6 @@
 import 'package:app_livros/models/livro.dart';
 import 'package:app_livros/widgets/icones_cards.dart';
+import 'package:app_livros/widgets/texto_formatado.dart';
 import 'package:flutter/material.dart';
 
 class CardLivros extends StatefulWidget {
@@ -29,27 +30,30 @@ class _CardLivrosState extends State<CardLivros> {
         crossAxisAlignment: CrossAxisAlignment.center,
 
         children: [
-          Text(
+          TextoFormatado(
             widget.livro.titulo,
-            style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            textAlign: TextAlign.center,
           ),
 
           const SizedBox(height: 10),
 
-          Text(
+          TextoFormatado(
             'Autor: ${widget.livro.autor}',
-            style: const TextStyle(fontSize: 16, color: Colors.white),
+            fontSize: 16,
+            color: Colors.white,
+            textAlign: TextAlign.center,
           ),
 
           const SizedBox(height: 5),
 
-          Text(
+          TextoFormatado(
             'Gênero: ${widget.livro.genero}',
-            style: const TextStyle(fontSize: 16, color: Colors.white),
+            fontSize: 16,
+            color: Colors.white,
+            textAlign: TextAlign.center,
           ),
 
           const SizedBox(height: 20),
