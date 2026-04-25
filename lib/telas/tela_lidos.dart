@@ -1,3 +1,5 @@
+import 'package:app_livros/database/dh_helper.dart';
+import 'package:app_livros/widgets/item_livro_lista.dart';
 import 'package:app_livros/widgets/texto_formatado.dart';
 import 'package:flutter/material.dart';
 
@@ -48,9 +50,12 @@ class _TelaLidosState extends State<TelaLidos> {
                   : ListView.builder(
                       itemCount: lidos.length,
                       itemBuilder: (context, index) {
-                        return CardLivros(
+                        return ItemLivroLista(
                           livro: lidos[index],
-                          onUpdate: () => setState(() {}),
+                          onUpdate: () async {
+                            await DBHelper.updateLivro(lidos[index]);
+                            setState(() {});
+                          },
                         );
                       },
                     ),

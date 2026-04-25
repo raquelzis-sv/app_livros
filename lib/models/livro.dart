@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Livro {
-  final String id;
+  final int? id;
   final String titulo;
   final String autor;
   final String genero;
@@ -11,7 +11,7 @@ class Livro {
   bool disliked;
 
   Livro({
-    required this.id,
+    this.id,
     required this.titulo,
     required this.autor,
     required this.genero,
@@ -20,4 +20,30 @@ class Livro {
     this.liked = false,
     this.disliked = false,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'titulo': titulo,
+      'autor': autor,
+      'genero': genero,
+      'cor': cor.value,
+      'lido': lido ? 1 : 0,
+      'liked': liked ? 1 : 0,
+      'disliked': disliked ? 1 : 0,
+    };
+  }
+
+  factory Livro.fromMap(Map<String, dynamic> map) {
+    return Livro(
+      id: map['id'] as int?,
+      titulo: map['titulo'],
+      autor: map['autor'],
+      genero: map['genero'],
+      cor: Color(map['cor']),
+      lido: map['lido'] == 1,
+      liked: map['liked'] == 1,
+      disliked: map['disliked'] == 1,
+    );
+  }
 }

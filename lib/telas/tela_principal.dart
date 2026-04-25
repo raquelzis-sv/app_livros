@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:app_livros/database/dh_helper.dart';
 import 'package:app_livros/models/livro.dart';
 import 'package:app_livros/telas/tela_cadastro_livro.dart';
 import 'package:app_livros/telas/tela_favoritos.dart';
@@ -18,39 +19,20 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  List<Livro> listaLivros = [
-    Livro(
-      id: '1',
-      titulo: 'Dom Casmurro',
-      autor: 'Machado de Assis',
-      genero: 'Romance',
-      cor: Colors.deepPurple,
-      lido: true,
-      liked: true,
-    ),
-    Livro(
-      id: '2',
-      titulo: '1984',
-      autor: 'George Orwell',
-      genero: 'Distopia',
-      cor: Colors.blue,
-    ),
-    Livro(
-      id: '3',
-      titulo: 'O Senhor dos Anéis',
-      autor: 'J.R.R. Tolkien',
-      genero: 'Fantasia',
-      cor: Colors.green,
-      lido: true,
-    ),
-    Livro(
-      id: '4',
-      titulo: 'Fomos Planejados',
-      autor: 'Marcus Eberlin',
-      genero: 'Ciência/Religião',
-      cor: Colors.orange,
-    ),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    carregarLivros();
+  }
+
+  Future<void> carregarLivros() async {
+    final livros = await DBHelper.getLivros();
+    setState(() {
+      listaLivros = livros;
+    });
+  }
+
+  List<Livro> listaLivros = [];
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +51,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 MaterialPageRoute(builder: (_) => TelaCadastroLivro()),
               );
               if (retorno != null) {
-                setState(() {
-                  listaLivros.add(retorno);
-                });
+                await DBHelper.insertLivro(retorno);
+                carregarLivros();
               }
             },
           ),
@@ -107,9 +88,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                         MaterialPageRoute(builder: (_) => TelaCadastroLivro()),
                       );
                       if (retorno != null) {
-                        setState(() {
-                          listaLivros.add(retorno);
-                        });
+                        await DBHelper.insertLivro(retorno);
+                        carregarLivros();
                       }
                     },
                     icon: const Icon(Icons.library_add),
@@ -147,7 +127,32 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             itemBuilder: (context, index) {
                               return CardLivros(
                                 livro: listaLivros[index],
-                                onUpdate: () => setState(() {}),
+                                onUpdate: () async {
+                                  await DBHelper.updateLivro(
+                                    listaLivros[index],
+                                  );
+                                  carregarLivros();
+                                },
+                                onDelete: () async {
+                                  await DBHelper.deleteLivro(
+                                    listaLivros[index].id!,
+                                  );
+                                  carregarLivros();
+                                },
+                                onEdit: () async {
+                                  final retorno = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => TelaCadastroLivro(
+                                        livro: listaLivros[index],
+                                      ),
+                                    ),
+                                  );
+                                  if (retorno != null) {
+                                    await DBHelper.updateLivro(retorno);
+                                    carregarLivros();
+                                  }
+                                },
                               );
                             },
                           ),

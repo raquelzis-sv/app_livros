@@ -6,8 +6,16 @@ import 'package:flutter/material.dart';
 class CardLivros extends StatefulWidget {
   final Livro livro;
   final VoidCallback? onUpdate;
+  final VoidCallback? onDelete;
+  final VoidCallback? onEdit;
 
-  const CardLivros({super.key, required this.livro, this.onUpdate});
+  const CardLivros({
+    super.key,
+    required this.livro,
+    this.onUpdate,
+    this.onDelete,
+    this.onEdit,
+  });
 
   @override
   State<CardLivros> createState() => _CardLivrosState();
@@ -24,21 +32,41 @@ class _CardLivrosState extends State<CardLivros> {
         borderRadius: BorderRadius.circular(15),
         border: Border.all(color: Colors.black, width: 1),
       ),
-
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-
         children: [
-          TextoFormatado(
-            widget.livro.titulo,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-            textAlign: TextAlign.center,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const SizedBox(width: 40),
+
+              Expanded(
+                child: TextoFormatado(
+                  widget.livro.titulo,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+
+              PopupMenuButton<String>(
+                icon: const Icon(Icons.more_vert, color: Colors.white),
+                onSelected: (value) {
+                  if (value == 'editar') {
+                    widget.onEdit?.call();
+                  } else if (value == 'excluir') {
+                    widget.onDelete?.call();
+                  }
+                },
+                itemBuilder: (context) => const [
+                  PopupMenuItem(value: 'editar', child: Text('Editar')),
+                  PopupMenuItem(value: 'excluir', child: Text('Excluir')),
+                ],
+              ),
+            ],
           ),
 
-          const SizedBox(height: 10),
+          const SizedBox(height: 15),
 
           TextoFormatado(
             'Autor: ${widget.livro.autor}',

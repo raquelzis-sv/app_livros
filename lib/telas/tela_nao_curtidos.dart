@@ -1,3 +1,5 @@
+import 'package:app_livros/database/dh_helper.dart';
+import 'package:app_livros/widgets/item_livro_lista.dart';
 import 'package:app_livros/widgets/texto_formatado.dart';
 import 'package:flutter/material.dart';
 
@@ -48,9 +50,12 @@ class _TelaNaoCurtidosState extends State<TelaNaoCurtidos> {
                   : ListView.builder(
                       itemCount: naoCurtidos.length,
                       itemBuilder: (context, index) {
-                        return CardLivros(
+                        return ItemLivroLista(
                           livro: naoCurtidos[index],
-                          onUpdate: () => setState(() {}),
+                          onUpdate: () async {
+                            await DBHelper.updateLivro(naoCurtidos[index]);
+                            setState(() {});
+                          },
                         );
                       },
                     ),
