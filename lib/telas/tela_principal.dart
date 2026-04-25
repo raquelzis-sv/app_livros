@@ -192,7 +192,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     MaterialPageRoute(
                       builder: (_) => TelaFavoritos(listaLivros: listaLivros),
                     ),
-                  ).then((value) => setState(() {})),
+                  ).then((value) => carregarLivros()),
                 ),
                 BotaoFormatado(
                   icone: Icons.check_circle,
@@ -202,7 +202,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     MaterialPageRoute(
                       builder: (_) => TelaLidos(listaLivros: listaLivros),
                     ),
-                  ).then((value) => setState(() {})),
+                  ).then((value) => carregarLivros()),
                 ),
                 BotaoFormatado(
                   icone: Icons.thumb_down,
@@ -212,7 +212,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     MaterialPageRoute(
                       builder: (_) => TelaNaoCurtidos(listaLivros: listaLivros),
                     ),
-                  ).then((value) => setState(() {})),
+                  ).then((value) => carregarLivros()),
                 ),
               ],
             ),
