@@ -13,10 +13,6 @@ class ItemLivroLista extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       elevation: 2,
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: livro.cor,
-          child: const Icon(Icons.menu_book, color: Colors.white),
-        ),
         title: Text(
           livro.titulo,
           style: const TextStyle(fontWeight: FontWeight.bold),
