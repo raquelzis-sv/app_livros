@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:app_livros/models/livro.dart';
-import 'package:app_livros/widgets/texto_formatado.dart';
+import 'package:app_livros/model/livro.dart';
+import 'package:app_livros/view/widgets/texto_formatado.dart';
 import 'package:flutter/material.dart';
 
 class TelaCadastroLivro extends StatefulWidget {

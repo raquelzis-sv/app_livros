@@ -23,27 +23,29 @@ class Livro {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      if (id != null) 'id': id,
       'titulo': titulo,
       'autor': autor,
       'genero': genero,
       'cor': cor.value,
-      'lido': lido ? 1 : 0,
-      'liked': liked ? 1 : 0,
-      'disliked': disliked ? 1 : 0,
+      'lido': lido,
+      'liked': liked,
+      'disliked': disliked,
     };
   }
 
   factory Livro.fromMap(Map<String, dynamic> map) {
     return Livro(
-      id: map['id'] as int?,
+      id: map['id'],
       titulo: map['titulo'],
       autor: map['autor'],
       genero: map['genero'],
       cor: Color(map['cor']),
-      lido: map['lido'] == 1,
-      liked: map['liked'] == 1,
-      disliked: map['disliked'] == 1,
+      lido: map['lido'] is bool ? map['lido'] : map['lido'] == 1,
+      liked: map['liked'] is bool ? map['liked'] : map['liked'] == 1,
+      disliked: map['disliked'] is bool
+          ? map['disliked']
+          : map['disliked'] == 1,
     );
   }
 }

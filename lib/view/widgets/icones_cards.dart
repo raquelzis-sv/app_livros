@@ -1,4 +1,4 @@
-import 'package:app_livros/models/livro.dart';
+import 'package:app_livros/model/livro.dart';
 import 'package:flutter/material.dart';
 
 class IconesCards extends StatefulWidget {

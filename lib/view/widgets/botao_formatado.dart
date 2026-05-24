@@ -1,4 +1,4 @@
-import 'package:app_livros/widgets/texto_formatado.dart';
+import 'package:app_livros/view/widgets/texto_formatado.dart';
 import 'package:flutter/material.dart';
 
 class BotaoFormatado extends StatelessWidget {

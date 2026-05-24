@@ -1,6 +1,6 @@
-import 'package:app_livros/models/livro.dart';
-import 'package:app_livros/widgets/icones_cards.dart';
-import 'package:app_livros/widgets/texto_formatado.dart';
+import 'package:app_livros/model/livro.dart';
+import 'package:app_livros/view/widgets/icones_cards.dart';
+import 'package:app_livros/view/widgets/texto_formatado.dart';
 import 'package:flutter/material.dart';
 
 class CardLivros extends StatefulWidget {

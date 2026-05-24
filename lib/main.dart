@@ -1,17 +1,10 @@
-import 'dart:io';
-
-import 'package:app_livros/telas/tela_principal.dart';
+import 'package:app_livros/service/database_service.dart';
+import 'package:app_livros/view/tela_principal.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (Platform.isWindows || Platform.isLinux) {
-    sqfliteFfiInit();
-    databaseFactory = databaseFactoryFfi;
-  }
-
+  await DatabaseService.inicializar();
   runApp(const MainApp());
 }
 
