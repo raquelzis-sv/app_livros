@@ -10,6 +10,15 @@ class LivroController extends ChangeNotifier {
 
   LivroController(this._service);
 
+  List<Livro> get livrosLidos =>
+      listaLivros.where((livro) => livro.lido).toList();
+
+  List<Livro> get livrosFavoritos =>
+      listaLivros.where((livro) => livro.liked).toList();
+
+  List<Livro> get livrosNaoCurtidos =>
+      listaLivros.where((livro) => livro.disliked).toList();
+
   Future<void> carregarLivros() async {
     carregando = true;
     notifyListeners(); // Avisa a tela para mostrar um loading
@@ -33,5 +42,11 @@ class LivroController extends ChangeNotifier {
   Future<void> deletarLivro(int id) async {
     await _service.deletarLivro(id);
     await carregarLivros();
+  }
+
+  void limpar() {
+    listaLivros = [];
+    carregando = false;
+    notifyListeners();
   }
 }

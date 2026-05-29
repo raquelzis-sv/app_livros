@@ -27,7 +27,7 @@ class Livro {
       'titulo': titulo,
       'autor': autor,
       'genero': genero,
-      'cor': cor.value,
+      'cor': cor.toARGB32(),
       'lido': lido,
       'liked': liked,
       'disliked': disliked,

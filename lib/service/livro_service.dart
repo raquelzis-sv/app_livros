@@ -2,22 +2,35 @@ import 'package:app_livros/model/livro.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LivroService {
-  final _client = Supabase.instance.client;
-  // Busca todas os livros da tabela remota
+  final SupabaseClient _client;
+
+  LivroService([SupabaseClient? client])
+      : _client = client ?? Supabase.instance.client;
+
+  String get _userId {
+    final id = _client.auth.currentUser?.id;
+    if (id == null) {
+      throw Exception('Usuário não autenticado.');
+    }
+    return id;
+  }
+
   Future<List<Livro>> getLivros() async {
     final response = await _client
         .from('Livros')
         .select()
-        .order('id', ascending: true); // Ordena de forma crescente
+        .eq('user_id', _userId)
+        .order('id', ascending: true);
+
     return response.map((item) => Livro.fromMap(item)).toList();
   }
 
-  // Insere um novo livro
   Future<void> salvarLivro(Livro livro) async {
-    await _client.from('Livros').insert(livro.toMap());
+    final dados = livro.toMap();
+    dados['user_id'] = _userId;
+    await _client.from('Livros').insert(dados);
   }
 
-  // Atualiza os dados gerais do livro (título, autor, gênero, cor, etc.)
   Future<void> atualizarLivro(Livro livro) async {
     if (livro.id == null) {
       throw Exception('Não é possível atualizar um livro sem ID.');
@@ -26,14 +39,11 @@ class LivroService {
     await _client
         .from('Livros')
         .update(livro.toMap())
-        .eq(
-          'id',
-          livro.id!,
-        ); // Filtra pelo ID para atualizar o registro correto
+        .eq('id', livro.id!)
+        .eq('user_id', _userId);
   }
 
-  // Remove o registro da tabela em nuvem através do ID correspondente
   Future<void> deletarLivro(int id) async {
-    await _client.from('Livros').delete().eq('id', id);
+    await _client.from('Livros').delete().eq('id', id).eq('user_id', _userId);
   }
 }

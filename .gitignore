@@ -1,3 +1,6 @@
+# Variáveis de ambiente (chaves do Supabase)
+.env
+
 # Miscellaneous
 *.class
 *.log
