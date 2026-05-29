@@ -10,7 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.2.1
+  open_file: ^3.5.10
+  path_provider: ^2.1.5
+  pdf: ^3.11.3
   provider: ^6.1.5
+  share_plus: ^10.1.4
   supabase_flutter: ^2.12.4
 
 dev_dependencies:
